@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update SEPA Season 5 - Group Data</title>
     <style>
+    <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f8f9fa;
@@ -79,7 +80,9 @@
             </div>
             <div class="form-group">
                 <label for="team">Team</label>
-                <input type="text" id="team" required>
+                <select id="team" required>
+                    <!-- Teams will be populated here -->
+                </select>
             </div>
             <div class="form-group">
                 <label for="played">Played</label>
@@ -123,20 +126,57 @@
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
     <script>
         // Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyACuKrOws6x4XSzwK_cbt12apFKZd1wdTo",
-  authDomain: "football-c4a66.firebaseapp.com",
-  databaseURL: "https://football-c4a66-default-rtdb.firebaseio.com",
-  projectId: "football-c4a66",
-  storageBucket: "football-c4a66.appspot.com",
-  messagingSenderId: "816618764771",
-  appId: "1:816618764771:web:80a69d110079bf080e48d6",
-  measurementId: "G-946RE3GCMW"
-};
+        const firebaseConfig = {
+            apiKey: "AIzaSyACuKrOws6x4XSzwK_cbt12apFKZd1wdTo",
+            authDomain: "football-c4a66.firebaseapp.com",
+            databaseURL: "https://football-c4a66-default-rtdb.firebaseio.com",
+            projectId: "football-c4a66",
+            storageBucket: "football-c4a66.appspot.com",
+            messagingSenderId: "816618764771",
+            appId: "1:816618764771:web:80a69d110079bf080e48d6",
+            measurementId: "G-946RE3GCMW"
+        };
 
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
+
+        // Populate team dropdown when group is selected
+        document.getElementById('group').addEventListener('change', function() {
+            const selectedGroup = this.value;
+            const teamDropdown = document.getElementById('team');
+            teamDropdown.innerHTML = ''; // Clear existing options
+
+            database.ref(`groups/Group ${selectedGroup}`).once('value', snapshot => {
+                snapshot.forEach(childSnapshot => {
+                    const teamName = childSnapshot.key;
+                    const option = document.createElement('option');
+                    option.value = teamName;
+                    option.textContent = teamName;
+                    teamDropdown.appendChild(option);
+                });
+            });
+        });
+
+        // Populate form fields when a team is selected
+        document.getElementById('team').addEventListener('change', function() {
+            const selectedGroup = document.getElementById('group').value;
+            const selectedTeam = this.value;
+
+            if (selectedTeam) {
+                database.ref(`groups/Group ${selectedGroup}/${selectedTeam}`).once('value', snapshot => {
+                    const teamData = snapshot.val();
+                    document.getElementById('played').value = teamData.played;
+                    document.getElementById('won').value = teamData.won;
+                    document.getElementById('drawn').value = teamData.drawn;
+                    document.getElementById('lost').value = teamData.lost;
+                    document.getElementById('gf').value = teamData.gf;
+                    document.getElementById('ga').value = teamData.ga;
+                    document.getElementById('gd').value = teamData.gd;
+                    document.getElementById('points').value = teamData.points;
+                });
+            }
+        });
 
         document.getElementById('update-form').addEventListener('submit', function(event) {
             event.preventDefault();
@@ -172,6 +212,11 @@ const firebaseConfig = {
                 .catch((error) => {
                     document.getElementById('message').textContent = 'Update failed: ' + error.message;
                 });
+        });
+
+        // Initial load to populate the team dropdown if a group is selected
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('group').dispatchEvent(new Event('change'));
         });
     </script>
 </body>
