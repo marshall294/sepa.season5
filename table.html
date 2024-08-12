@@ -88,16 +88,16 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyACuKrOws6x4XSzwK_cbt12apFKZd1wdTo",
-  authDomain: "football-c4a66.firebaseapp.com",
-  databaseURL: "https://football-c4a66-default-rtdb.firebaseio.com",
-  projectId: "football-c4a66",
-  storageBucket: "football-c4a66.appspot.com",
-  messagingSenderId: "816618764771",
-  appId: "1:816618764771:web:80a69d110079bf080e48d6",
-  measurementId: "G-946RE3GCMW"
-};
+        const firebaseConfig = {
+            apiKey: "AIzaSyACuKrOws6x4XSzwK_cbt12apFKZd1wdTo",
+            authDomain: "football-c4a66.firebaseapp.com",
+            databaseURL: "https://football-c4a66-default-rtdb.firebaseio.com",
+            projectId: "football-c4a66",
+            storageBucket: "football-c4a66.appspot.com",
+            messagingSenderId: "816618764771",
+            appId: "1:816618764771:web:80a69d110079bf080e48d6",
+            measurementId: "G-946RE3GCMW"
+        };
 
             // Initialize Firebase
             firebase.initializeApp(firebaseConfig);
@@ -155,6 +155,8 @@ const firebaseConfig = {
             // Function to populate all group tables
             function populateAllGroups() {
                 const groupNames = ['A', 'B', 'C', 'D', 'E', 'F'];
+                const container = document.getElementById('group-tables');
+                container.innerHTML = ''; // Clear existing tables
 
                 groupNames.forEach(groupName => {
                     const groupRef = database.ref(`groups/Group ${groupName}`);
@@ -164,8 +166,14 @@ const firebaseConfig = {
                         if (data) {
                             const teams = Object.values(data).sort((a, b) => b.points - a.points);
                             const tableHTML = generateTableHTML(groupName, teams);
-                            const container = document.getElementById('group-tables');
-                            if (container) {
+
+                            // Check if the table already exists
+                            const groupTable = document.getElementById(`group-${groupName.toLowerCase()}`);
+                            if (groupTable) {
+                                // If table exists, update it
+                                groupTable.parentElement.innerHTML = tableHTML;
+                            } else {
+                                // If table does not exist, add it to the container
                                 container.innerHTML += tableHTML;
                             }
                         }
@@ -173,7 +181,7 @@ const firebaseConfig = {
                 });
             }
 
-            // Populate group tables on page load
+            // Populate group tables on page load and on database changes
             populateAllGroups();
         });
     </script>
