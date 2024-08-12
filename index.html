@@ -5,10 +5,115 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SEPA Season 5 Tournament</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Add Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap">
     <!-- Add Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Add Swiper for slides -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <style>
+        /* Base Styles */
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+        header {
+            background-color: #1f1f1f;
+            padding: 1em 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li {
+            margin: 0 1em;
+        }
+        nav ul li a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: #ff4081;
+        }
+        .home-section, .standing-section, .livescore-section, .organizers-section, .chairman-section {
+            padding: 5em 2em 2em;
+        }
+        .home-section {
+            padding-top: 4em;
+        }
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            height: 60vh;
+            overflow: hidden;
+        }
+        .swiper-slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .video-section {
+            margin-top: 2em;
+            text-align: center;
+        }
+        video {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 10px;
+        }
+        h2 {
+            font-size: 2em;
+            margin-bottom: 1em;
+            color: #ff4081;
+            text-align: center;
+        }
+        .organizers, .chairman {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1em;
+        }
+        .organizer, .chairman {
+            background-color: #1f1f1f;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 200px;
+            text-align: center;
+            padding: 1em;
+            transition: transform 0.3s;
+        }
+        .organizer:hover, .chairman:hover {
+            transform: scale(1.05);
+        }
+        .organizer-img, .chairman-img {
+            border-radius: 50%;
+            overflow: hidden;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+        }
+        .organizer-img img, .chairman-img img {
+            width: 100%;
+            height: auto;
+        }
+        .organizer p, .chairman p {
+            margin: 0.5em 0 0;
+            font-weight: 700;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -33,7 +138,6 @@
                     <div class="swiper-slide">
                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScsxA_pQ4Tjw5WtjDjv96MydApOFf7gPkYFA&s" alt="Slide 2">
                     </div>
-                    <!-- Add more slides as needed -->
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
@@ -48,14 +152,16 @@
 
     <section id="standing" class="standing-section">
         <h2>Current Standings</h2>
-        <!-- Table or content for standings -->
-        <div id="standings-table"></div>
+        <div id="standings-table">
+            <!-- Table or content for standings -->
+        </div>
     </section>
 
     <section id="livescore" class="livescore-section">
         <h2>Live Scores</h2>
-        <!-- Content for live scores -->
-        <div id="live-scores"></div>
+        <div id="live-scores">
+            <!-- Content for live scores -->
+        </div>
     </section>
 
     <section class="organizers-section">
@@ -73,7 +179,6 @@
                 </div>
                 <p>Organizer 2 Name</p>
             </div>
-            <!-- Add more organizers as needed -->
         </div>
     </section>
 
@@ -81,15 +186,26 @@
         <h2>Chairman</h2>
         <div class="chairman">
             <div class="chairman-img">
-                <img src="data:image/jpeg;base64,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" alt="Chairman">
+                <img src="https://example.com/chairman-image.jpg" alt="Chairman">
             </div>
             <p>Chairman Name</p>
         </div>
     </section>
 
-    <!-- Add Swiper JS -->
+    <!-- Swiper JS -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <!-- Custom JS -->
-    <script src="scripts.js"></script>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+        });
+    </script>
 </body>
 </html>
