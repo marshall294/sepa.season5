@@ -1,227 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEPA Season 5 Tournament</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Add Google Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap">
-    <!-- Add Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Add Swiper for slides -->
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-    <style>
-        /* Base Styles */
-        body {
-            margin: 0;
-            font-family: 'Roboto', sans-serif;
-            background-color: #121212;
-            color: #e0e0e0;
-            overflow-x: hidden;
-        }
-        header {
-            background-color: #1f1f1f;
-            padding: 1em 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-        }
-        nav ul {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-        nav ul li {
-            margin: 0 1em;
-        }
-        nav ul li a {
-            color: #e0e0e0;
-            text-decoration: none;
-            font-weight: 700;
-            transition: color 0.3s;
-        }
-        nav ul li a:hover {
-            color: #ff4081;
-        }
-        .home-section, .standing-section, .livescore-section, .organizers-section, .chairman-section {
-            padding: 5em 2em 2em;
-        }
-        .home-section {
-            padding-top: 4em;
-        }
-        .slideshow-container {
-            position: relative;
-            width: 100%;
-            height: 60vh;
-            overflow: hidden;
-        }
-        .swiper-slide img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        .video-section {
-            margin-top: 2em;
-            text-align: center;
-        }
-        video {
-            width: 100%;
-            max-width: 800px;
-            border-radius: 10px;
-        }
-        h2 {
-            font-size: 2em;
-            margin-bottom: 1em;
-            color: #ff4081;
-            text-align: center;
-        }
-        .organizers, .chairman {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1em;
-        }
-        .organizer, .chairman {
-            background-color: #1f1f1f;
-            border-radius: 10px;
-            overflow: hidden;
-            width: 200px;
-            text-align: center;
-            padding: 1em;
-            transition: transform 0.3s;
-        }
-        .organizer:hover, .chairman:hover {
-            transform: scale(1.05);
-        }
-        .organizer-img, .chairman-img {
-            border-radius: 50%;
-            overflow: hidden;
-            width: 100px;
-            height: 100px;
-            margin: 0 auto;
-        }
-        .organizer-img img, .chairman-img img {
-            width: 100%;
-            height: auto;
-        }
-        .organizer p, .chairman p {
-            margin: 0.5em 0 0;
-            font-weight: 700;
-        }
-        footer {
-            background-color: #1f1f1f;
-            color: #e0e0e0;
-            text-align: center;
-            padding: 1em 0;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-            left: 0;
-        }
-        footer p {
-            margin: 0;
-        }
-        footer .contact {
-            margin-top: 0.5em;
-        }
-        footer a {
-            color: #ff4081;
-            text-decoration: none;
-        }
-        footer a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <meta name="description" content="SEPA SEASON 5 FOOTBALL TOURNAMENT - A prestigious football competition in Suleja, featuring top local teams.">
+    <meta name="keywords" content="Football, SEPA, Tournament, Suleja, Season 5, Live Scores, Teams, Sports">
+    <meta name="author" content="MathCloud-Tech">
+    <meta name="robots" content="index, follow">
+    <title>SEPA SEASON 5 FOOTBALL TOURNAMENT</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
 </head>
+
 <body>
+    <!-- Header Section -->
     <header>
+        <div class="logo">
+            <img src="logo.png" alt="SEPA Season 5 Logo" />
+        </div>
         <nav>
             <ul>
                 <li><a href="#home">Home</a></li>
-                <li><a href="table.html">Standing</a></li>
-                <li><a href="#livescore">Live Score</a></li>
+                <li><a href="construct.html">Live Scores</a></li>
+                <li><a href="construct.html">Advertisement</a></li>
             </ul>
         </nav>
     </header>
 
-    <section id="home" class="home-section">
-        <div class="slideshow-container">
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    <!-- Slide 1 -->
-                    <div class="swiper-slide">
-                        <img src="https://c8.alamy.com/comp/2H8J5M8/football-league-tournament-poster-soccer-ball-with-golden-winner-cup-flying-confetti-invitation-banner-on-sport-competition-game-award-ceremony-2H8J5M8.jpg" alt="Slide 1">
-                    </div>
-                    <!-- Slide 2 -->
-                    <div class="swiper-slide">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScsxA_pQ4Tjw5WtjDjv96MydApOFf7gPkYFA&s" alt="Slide 2">
-                    </div>
-                </div>
-                <div class="swiper-pagination"></div>
-            </div>
+    <!-- Slideshow Section -->
+    <section class="slideshow-container">
+        <div class="mySlides fade">
+            <img src="slide1.png" alt="Slide 1">
         </div>
-        <div class="video-section">
-            <video controls>
-                <source src="video.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+        <div class="mySlides fade">
+            <img src="slide2.png" alt="Slide 2">
+        </div>
+        <div class="mySlides fade">
+            <img src="slide3.png" alt="Slide 3">
+        </div>
+        <div class="mySlides fade">
+            <img src="slide4.png" alt="Slide 4">
         </div>
     </section>
 
-    <section class="organizers-section">
-        <h2>Organizers</h2>
-        <div class="organizers">
-            <div class="organizer">
-                <div class="organizer-img">
-                    <img src="https://bob.gov.ng/wp-content/uploads/2024/03/Cheif-A.-S.-Awomolo-SAN-1-807x1024.jpg" alt="Organizer 1">
+    <!-- Main Content Section -->
+    <main>
+        <section id="organizers">
+            <h2>Organizers</h2>
+            <div class="organizers-container">
+                <div class="organizer">
+                    <img src="o1.jpg" alt="Organizer 1" class="organizer-3d-frame" />
+                    <p>Organizer 1</p>
                 </div>
-                <p>Organizer 1 Name</p>
-            </div>
-            <div class="organizer">
-                <div class="organizer-img">
-                    <img src="https://intelligence.house.gov/uploadedphotos/mediumresolution/322ab1ed-eeb4-4782-945b-e6fac08fb3b5.jpg" alt="Organizer 2">
+                <div class="organizer">
+                    <img src="o2.jfif" alt="Organizer 2" class="organizer-3d-frame" />
+                    <p>Organizer 2</p>
                 </div>
-                <p>Organizer 2 Name</p>
+                <div class="organizer">
+                    <img src="o3.jfif" alt="Organizer 3" class="organizer-3d-frame" />
+                    <p>Organizer 3</p>
+                </div>
             </div>
-        </div>
-    </section>
-
-    <section class="chairman-section">
-        <h2>Chairman</h2>
-        <div class="chairman">
-            <div class="chairman-img">
-                <img src="https://dailynigerian.com/wp-content/uploads/2022/05/Chairman-of-Keffi-Local-Government-Area-in-Nasarawa-State-Muhammad-Shehu-Baba.jpeg" alt="Chairman">
+            <div class="chairman">
+                <img src="chairman.jpeg" alt="Suleja Local Government Chairman" class="chairman-frame" />
+                <p>Suleja Local Government Chairman</p>
             </div>
-            <p>Chairman Name</p>
-        </div>
-    </section>
+        </section>
 
-    <!-- Swiper JS -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script>
-        var swiper = new Swiper('.swiper-container', {
-            loop: true,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            autoplay: {
-                delay: 5000,
-                disableOnInteraction: false,
-            },
-        });
-    </script>
+        <section id="groups">
+            <h2>Participating Teams <a href="table.html">FULL TABLE</a></h2>
+            <div class="group-section">
+                <h3>Group A</h3>
+                <ul>
+                    <li>JIKADAWA FC</li>
+                    <li>HALI FC</li>
+                    <li>SUPER LION FC</li>
+                    <li>BALIOUX FC</li>
+                </ul>
+            </div>
+            <div class="group-section">
+                <h3>Group B</h3>
+                <ul>
+                    <li>BERGER PAINT</li>
+                    <li>ATLENTIC INTERGRAT FA</li>
+                    <li>SOCCER BUILDERS</li>
+                    <li>IFYOKO INTERG FC</li>
+                </ul>
+            </div>
+            <div class="group-section">
+                <h3>Group C</h3>
+                <ul>
+                    <li>STARLET FC</li>
+                    <li>ROCK UTD</li>
+                    <li>RIDERS FC</li>
+                    <li>WONDER BOYS</li>
+                </ul>
+            </div>
+            <div class="group-section">
+                <h3>Group D</h3>
+                <ul>
+                    <li>MAGAJI FC</li>
+                    <li>UTD STAR</li>
+                    <li>99 BULLETS</li>
+                    <li>ZAKI & CO FC</li>
+                </ul>
+            </div>
+            <div class="group-section">
+                <h3>Group E</h3>
+                <ul>
+                    <li>BOLA PARK FC</li>
+                    <li>YOUNG PILLARS</li>
+                    <li>ROYAL STAR</li>
+                    <li>MILANO</li>
+                </ul>
+            </div>
+            <div class="group-section">
+                <h3>Group F</h3>
+                <ul>
+                    <li>MARABA FC</li>
+                    <li>UTD COACHES FC</li>
+                    <li>MAGAJI BOYS</li>
+                    <li>LAZIO FC</li>
+                </ul>
+            </div>
+        </section>
+    </main>
 
+    <!-- Footer Section -->
     <footer>
-        <p>&copy; 2024 SEPA Tournament. All rights reserved.</p>
-        <div class="contact">
-            <p>For support, contact <a href="https://wa.me/2348102341648" target="_blank">MathCloud-Tech</a> via WhatsApp.</p>
-        </div>
+        <p>Designed and managed by <strong>MathCloud-Tech</strong> - WhatsApp: +2348102341648</p>
+        <p>For more information about SEPA SEASON 5 FOOTBALL TOURNAMENT, visit our official website or follow us on social media.</p>
     </footer>
+
+    <script src="script.js"></script> <!-- Link to your JavaScript file -->
 </body>
+
 </html>
