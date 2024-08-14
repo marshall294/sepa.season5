@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixture 4 Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            max-width: 800px;
+            text-align: center;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #77aaff 3px solid;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        .fixture-details {
+            background: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .fixture-details h2 {
+            margin-top: 0;
+        }
+        .fixture-details .team {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .fixture-details .team h3 {
+            margin: 0;
+        }
+        .fixture-details .score {
+            font-size: 36px;
+            font-weight: bold;
+        }
+        .fixture-details table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .fixture-details table, .fixture-details th, .fixture-details td {
+            border: 1px solid #ddd;
+        }
+        .fixture-details th, .fixture-details td {
+            padding: 10px;
+            text-align: center;
+        }
+        .fixture-details th {
+            background-color: #77aaff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Fixture 4 Details</h1>
+        </div>
+    </header>
+    <div class="container">
+        <div class="fixture-details" id="fixtureDetails">
+            <h2 id="fixtureTitle">Fixture 4: Team G vs Team H</h2>
+            <div class="team">
+                <h3 id="teamGName">Team G</h3>
+                <div class="score" id="teamGScore">0</div>
+                <div class="score">-</div>
+                <div class="score" id="teamHScore">0</div>
+                <h3 id="teamHName">Team H</h3>
+            </div>
+            <div id="timerStatus">Not Started</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Statistic</th>
+                        <th>Team G</th>
+                        <th>Team H</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ball Possession (%)</td>
+                        <td id="possessionG">0</td>
+                        <td id="possessionH">0</td>
+                    </tr>
+                    <tr>
+                        <td>Yellow Cards</td>
+                        <td id="yellowG">0</td>
+                        <td id="yellowH">0</td>
+                    </tr>
+                    <tr>
+                        <td>Red Cards</td>
+                        <td id="redG">0</td>
+                        <td id="redH">0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Firebase setup -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBK5UM0n8-GLvleW7l6B8Hi-_WuC64QA4U",
+            authDomain: "scores-b25a7.firebaseapp.com",
+            projectId: "scores-b25a7",
+            storageBucket: "scores-b25a7.appspot.com",
+            messagingSenderId: "1001957936318",
+            appId: "1:1001957936318:web:43934942ee87654fd8e2ef",
+            measurementId: "G-3QES2VR31T"
+        };
+        firebase.initializeApp(firebaseConfig);
+        var database = firebase.database();
+
+        let timerInterval;
+
+        function updateFixtureDetails(fixtureData) {
+            document.getElementById('fixtureTitle').textContent = `Fixture 4: ${fixtureData.teamG.name} vs ${fixtureData.teamH.name}`;
+            document.getElementById('teamGName').textContent = fixtureData.teamG.name;
+            document.getElementById('teamHName').textContent = fixtureData.teamH.name;
+            document.getElementById('teamGScore').textContent = fixtureData.teamG.score || 0;
+            document.getElementById('teamHScore').textContent = fixtureData.teamH.score || 0;
+            document.getElementById('timerStatus').textContent = fixtureData.timer || "Not Started";
+            document.getElementById('possessionG').textContent = fixtureData.statistics.possessionG || 0;
+            document.getElementById('possessionH').textContent = fixtureData.statistics.possessionH || 0;
+            document.getElementById('yellowG').textContent = fixtureData.statistics.yellowG || 0;
+            document.getElementById('yellowH').textContent = fixtureData.statistics.yellowH || 0;
+            document.getElementById('redG').textContent = fixtureData.statistics.redG || 0;
+            document.getElementById('redH').textContent = fixtureData.statistics.redH || 0;
+
+            updateTimer(fixtureData.timer);
+        }
+
+        function updateTimer(timerStatus) {
+            clearInterval(timerInterval);
+            const timerDisplay = document.getElementById('timerStatus');
+
+            if (timerStatus === '1st') {
+                let timer = 0;
+                timerInterval = setInterval(() => {
+                    if (timer < 46) {
+                        timerDisplay.textContent = `1st Half: ${timer}'`;
+                        timer++;
+                    } else {
+                        clearInterval(timerInterval);
+                        timerDisplay.textContent = 'HT';
+                    }
+                }, 60000);
+            } else if (timerStatus === '2nd') {
+                let timer = 45;
+                timerInterval = setInterval(() => {
+                    if (timer < 91) {
+                        timerDisplay.textContent = `2nd Half: ${timer}'`;
+                        timer++;
+                    } else {
+                        clearInterval(timerInterval);
+                        timerDisplay.textContent = 'FT';
+                    }
+                }, 60000);
+            }
+        }
+
+        database.ref('/fixtures/fixture4').on('value', (snapshot) => {
+            const fixtureData = snapshot.val();
+            updateFixtureDetails(fixtureData);
+        });
+    </script>
+</body>
+</html>
