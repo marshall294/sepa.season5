@@ -190,7 +190,7 @@ footer {
             }
         }
 
-        database.ref('/fixtures/fixture1').on('value', (snapshot) => {
+        database.ref('/fixtures/fixture9').on('value', (snapshot) => {
             const fixtureData = snapshot.val();
             updateFixtureDetails(fixtureData);
         });
