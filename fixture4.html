@@ -78,38 +78,38 @@
     </header>
     <div class="container">
         <div class="fixture-details" id="fixtureDetails">
-            <h2 id="fixtureTitle">Fixture 4: Team G vs Team H</h2>
+            <h2 id="fixtureTitle">Fixture 4: Team A vs Team B</h2>
             <div class="team">
-                <h3 id="teamGName">Team G</h3>
-                <div class="score" id="teamGScore">0</div>
+                <h3 id="teamAName">Team A</h3>
+                <div class="score" id="teamAScore">0</div>
                 <div class="score">-</div>
-                <div class="score" id="teamHScore">0</div>
-                <h3 id="teamHName">Team H</h3>
+                <div class="score" id="teamBScore">0</div>
+                <h3 id="teamBName">Team B</h3>
             </div>
             <div id="timerStatus">Not Started</div>
             <table>
                 <thead>
                     <tr>
                         <th>Statistic</th>
-                        <th>Team G</th>
-                        <th>Team H</th>
+                        <th>A</th>
+                        <th>B</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>Ball Possession (%)</td>
-                        <td id="possessionG">0</td>
-                        <td id="possessionH">0</td>
+                        <td id="possessionA">0</td>
+                        <td id="possessionB">0</td>
                     </tr>
                     <tr>
                         <td>Yellow Cards</td>
-                        <td id="yellowG">0</td>
-                        <td id="yellowH">0</td>
+                        <td id="yellowA">0</td>
+                        <td id="yellowB">0</td>
                     </tr>
                     <tr>
                         <td>Red Cards</td>
-                        <td id="redG">0</td>
-                        <td id="redH">0</td>
+                        <td id="redA">0</td>
+                        <td id="redB">0</td>
                     </tr>
                 </tbody>
             </table>
@@ -134,18 +134,18 @@
         let timerInterval;
 
         function updateFixtureDetails(fixtureData) {
-            document.getElementById('fixtureTitle').textContent = `Fixture 4: ${fixtureData.teamG.name} vs ${fixtureData.teamH.name}`;
-            document.getElementById('teamGName').textContent = fixtureData.teamG.name;
-            document.getElementById('teamHName').textContent = fixtureData.teamH.name;
-            document.getElementById('teamGScore').textContent = fixtureData.teamG.score || 0;
-            document.getElementById('teamHScore').textContent = fixtureData.teamH.score || 0;
+            document.getElementById('fixtureTitle').textContent = `Fixture 4: ${fixtureData.teamA.name} vs ${fixtureData.teamB.name}`;
+            document.getElementById('teamAName').textContent = fixtureData.teamA.name;
+            document.getElementById('teamBName').textContent = fixtureData.teamB.name;
+            document.getElementById('teamAScore').textContent = fixtureData.teamA.score || 0;
+            document.getElementById('teamBScore').textContent = fixtureData.teamB.score || 0;
             document.getElementById('timerStatus').textContent = fixtureData.timer || "Not Started";
-            document.getElementById('possessionG').textContent = fixtureData.statistics.possessionG || 0;
-            document.getElementById('possessionH').textContent = fixtureData.statistics.possessionH || 0;
-            document.getElementById('yellowG').textContent = fixtureData.statistics.yellowG || 0;
-            document.getElementById('yellowH').textContent = fixtureData.statistics.yellowH || 0;
-            document.getElementById('redG').textContent = fixtureData.statistics.redG || 0;
-            document.getElementById('redH').textContent = fixtureData.statistics.redH || 0;
+            document.getElementById('possessionA').textContent = fixtureData.statistics.possessionA || 0;
+            document.getElementById('possessionB').textContent = fixtureData.statistics.possessionB || 0;
+            document.getElementById('yellowA').textContent = fixtureData.statistics.yellowA || 0;
+            document.getElementById('yellowB').textContent = fixtureData.statistics.yellowB || 0;
+            document.getElementById('redA').textContent = fixtureData.statistics.redA || 0;
+            document.getElementById('redB').textContent = fixtureData.statistics.redB || 0;
 
             updateTimer(fixtureData.timer);
         }
